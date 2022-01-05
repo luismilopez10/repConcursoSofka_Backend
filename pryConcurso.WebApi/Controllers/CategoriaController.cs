@@ -44,5 +44,20 @@ namespace pryConcurso.WebApi.Controllers
             clsCategoria objClsCategoria = new clsCategoria();
             return objClsCategoria.fncConsultarCategoria(objMdlCategoria);
         }
+
+        /// <summary>
+        /// fncConsultarCategoriaNivel
+        /// <param name="intNivel"></param>
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("fncConsultarCategoriaNivel")]
+        public List<mdlCategoria> fncConsultarCategoriaNivel(int intNivel)
+        {
+            mdlCategoria objMdlCategoria = new mdlCategoria();
+            objMdlCategoria.intNivel = intNivel;
+            clsCategoria objClsCategoria = new clsCategoria();
+            return objClsCategoria.fncConsultarCategoriaNivel(objMdlCategoria);
+        }
     }
 }

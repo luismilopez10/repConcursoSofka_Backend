@@ -4,6 +4,7 @@ using System.Text;
 
 using pryConcurso.Model.Categoria;
 using pryConcurso.Broker.Operation;
+using System.Linq;
 
 namespace pryConcurso.BusinessRule.Categoria
 {
@@ -23,6 +24,20 @@ namespace pryConcurso.BusinessRule.Categoria
         public List<mdlCategoria> fncConsultarCategoria(mdlCategoria objMdlCategoria)
         {
             return objOptCategoria.fncConsultarCategoria(objMdlCategoria);
+        }
+        public List<mdlCategoria> fncConsultarCategoriaNivel(mdlCategoria objMdlCategoria)
+        {
+            List<mdlCategoria> lstCategoriaNivel = objOptCategoria.fncConsultarCategoria(objMdlCategoria);
+            List<mdlCategoria> lstCategoriaNivelFiltro = new List<mdlCategoria>();
+
+            var Filtro = from categoria in lstCategoriaNivel
+                         where categoria.intNivel == objMdlCategoria.intNivel
+                         select categoria;
+
+            foreach (var categoria in Filtro)
+                lstCategoriaNivelFiltro.Add(categoria);
+
+            return lstCategoriaNivelFiltro;
         }
     }
 }

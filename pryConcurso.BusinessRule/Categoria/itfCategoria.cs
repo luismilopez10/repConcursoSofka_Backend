@@ -10,5 +10,6 @@ namespace pryConcurso.BusinessRule.Categoria
     {
         string fncIngresarCategoria(mdlCategoria objMdlCategoria);
         List<mdlCategoria> fncConsultarCategoria(mdlCategoria objMdlCategoria);
+        List<mdlCategoria> fncConsultarCategoriaNivel(mdlCategoria objMdlCategoria);
     }
 }
