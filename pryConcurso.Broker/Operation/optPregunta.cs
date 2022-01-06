@@ -158,5 +158,52 @@ namespace pryConcurso.Broker.Operation
             }
             return lstPregunta;
         }
+
+
+        public List<mdlPregunta> fncConsultarPreguntaNivel(mdlPregunta objMdlPregunta, int intNivel)
+        {
+            string strResultado;
+
+            objCon = new SqlConnection(strConnectionString);
+            objSpaPregunta = new spaPregunta();
+
+            try
+            {
+                objCon.Open();
+                objCom = new SqlCommand(objSpaPregunta.spaConsultarPreguntaNivel, objCon);
+                objCom.CommandType = CommandType.StoredProcedure;
+                objCom.Parameters.AddWithValue("@intNivel", intNivel);
+
+                objDap = new SqlDataAdapter();
+                objDap.SelectCommand = objCom;
+
+                objDst = new DataSet();
+                objDap.Fill(objDst);
+
+                lstPregunta = new List<mdlPregunta>();
+
+                for (int i = 0; i < objDst.Tables[0].Rows.Count; i++)
+                {
+                    objMdlPregunta = new mdlPregunta();
+                    objMdlPregunta.intIdPregunta = Convert.ToInt32(objDst.Tables[0].Rows[i]["intIdPregunta"].ToString());
+                    objMdlPregunta.intIdCategoria = Convert.ToInt32(objDst.Tables[0].Rows[i]["intIdCategoria"].ToString());
+                    objMdlPregunta.strPregunta = Convert.ToString(objDst.Tables[0].Rows[i]["strPregunta"].ToString());
+                    objMdlPregunta.strRespuesta = Convert.ToString(objDst.Tables[0].Rows[i]["strRespuesta"].ToString());
+                    objMdlPregunta.blnActivo = Convert.ToBoolean(objDst.Tables[0].Rows[i]["blnActivo"].ToString());
+                    objMdlPregunta.dtmActualiza = Convert.ToDateTime(objDst.Tables[0].Rows[i]["dtmActualiza"].ToString());
+                    lstPregunta.Add(objMdlPregunta);
+                }
+
+            }
+            catch (SqlException ex)
+            {
+                strResultado = ex.Message.ToString();
+            }
+            finally
+            {
+                objCon.Close();
+            }
+            return lstPregunta;
+        }
     }
 }

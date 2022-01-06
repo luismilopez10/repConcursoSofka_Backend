@@ -79,5 +79,6 @@
     <Build Include="dbo\Stored Procedures\Pregunta\spaConsultarPregunta.sql" />
     <Build Include="dbo\Stored Procedures\Pregunta\spaConsultarPreguntaIdCategoria.sql" />
     <Build Include="dbo\Stored Procedures\Opcion\spaConsultarOpcionIdPregunta.sql" />
+    <Build Include="dbo\Stored Procedures\Pregunta\spaConsultarPreguntaNivel.sql" />
   </ItemGroup>
 </Project>

@@ -11,5 +11,6 @@ namespace pryConcurso.BusinessRule.Pregunta
         string fncIngresarPregunta(mdlPregunta objMdlPregunta);
         List<mdlPregunta> fncConsultarPregunta(mdlPregunta objMdlPregunta);
         List<mdlPregunta> fncConsultarPreguntaIdCategoria(mdlPregunta objMdlPregunta);
+        List<mdlPregunta> fncConsultarPreguntaNivel(mdlPregunta objMdlPregunta, int intNivel);
     }
 }

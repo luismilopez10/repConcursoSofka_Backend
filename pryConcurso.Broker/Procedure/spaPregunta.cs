@@ -11,6 +11,7 @@ namespace pryConcurso.Broker.Procedure
         public string spaIngresarPregunta = "spaIngresarPregunta";
         public string spaConsultarPregunta = "spaConsultarPregunta";
         public string spaConsultarPreguntaIdCategoria = "spaConsultarPreguntaIdCategoria";
+        public string spaConsultarPreguntaNivel = "spaConsultarPreguntaNivel";
 
         public spaPregunta()
         {

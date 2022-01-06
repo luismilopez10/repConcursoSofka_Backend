@@ -29,5 +29,10 @@ namespace pryConcurso.BusinessRule.Pregunta
         {
             return objOptPregunta.fncConsultarPreguntaIdCategoria(objMdlPregunta);
         }
+
+        public List<mdlPregunta> fncConsultarPreguntaNivel(mdlPregunta objMdlPregunta, int intNivel)
+        {
+            return objOptPregunta.fncConsultarPreguntaNivel(objMdlPregunta, intNivel);
+        }
     }
 }
