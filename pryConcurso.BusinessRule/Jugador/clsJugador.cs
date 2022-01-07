@@ -26,9 +26,11 @@ namespace pryConcurso.BusinessRule.Jugador
         public List<mdlJugador> fncConsultarJugador(mdlJugador objMdlJugador)
         {
             List<mdlJugador> lstJugador = objOptJugador.fncConsultarJugador(objMdlJugador);
-            List <mdlJugador> lstJugadorFiltro = new List<mdlJugador>();
+            List<mdlJugador> lstJugadorFiltroPuntaje = new List<mdlJugador>();
+            List<mdlJugador> lstJugadorFiltroDescendiente = new List<mdlJugador>();
 
-            var Filtro = from jugador in lstJugador
+            // Filtro para sumar puntaje acomulado para nombres iguales
+            var FiltroPuntaje = from jugador in lstJugador
                          group jugador by jugador.strNombre into GrupoJugador
                          select new
                          {
@@ -36,10 +38,18 @@ namespace pryConcurso.BusinessRule.Jugador
                              intPuntajeTotal = GrupoJugador.Sum(puntaje => puntaje.intPuntaje)
                          };
 
-            foreach (var jugador in Filtro)
-                lstJugadorFiltro.Add(new mdlJugador { strNombre = jugador.strNombre, intPuntaje = jugador.intPuntajeTotal});
+            foreach (var jugador in FiltroPuntaje)
+                lstJugadorFiltroPuntaje.Add(new mdlJugador { strNombre = jugador.strNombre, intPuntaje = jugador.intPuntajeTotal});
 
-            return lstJugadorFiltro;
+            // Filtro para ordenar en descendiente
+            var FiltroDescendiente = from jugador in lstJugadorFiltroPuntaje
+                                     orderby jugador.intPuntaje descending
+                                     select jugador;
+
+            foreach (var jugador in FiltroDescendiente)
+                lstJugadorFiltroDescendiente.Add(jugador);
+
+            return lstJugadorFiltroDescendiente;
         }
     }
 }
