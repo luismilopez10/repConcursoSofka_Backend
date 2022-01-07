@@ -19,9 +19,10 @@ namespace pryConcurso.BusinessRule.Jugador
 
         public string fncIngresarJugador(mdlJugador objMdlJugador)
         {
-            objMdlJugador.strNombre.ToUpper();
+            objMdlJugador.strNombre = objMdlJugador.strNombre.ToUpper();
             return objOptJugador.fncIngresarJugador(objMdlJugador);
         }
+
         public List<mdlJugador> fncConsultarJugador(mdlJugador objMdlJugador)
         {
             List<mdlJugador> lstJugador = objOptJugador.fncConsultarJugador(objMdlJugador);
