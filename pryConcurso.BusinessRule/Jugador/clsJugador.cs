@@ -25,6 +25,11 @@ namespace pryConcurso.BusinessRule.Jugador
 
         public List<mdlJugador> fncConsultarJugador(mdlJugador objMdlJugador)
         {
+            return objOptJugador.fncConsultarJugador(objMdlJugador);
+        }
+
+        public List<mdlJugador> fncConsultarJugadorSumDescendiente(mdlJugador objMdlJugador)
+        {
             List<mdlJugador> lstJugador = objOptJugador.fncConsultarJugador(objMdlJugador);
             List<mdlJugador> lstJugadorFiltroPuntaje = new List<mdlJugador>();
             List<mdlJugador> lstJugadorFiltroDescendiente = new List<mdlJugador>();
@@ -34,12 +39,21 @@ namespace pryConcurso.BusinessRule.Jugador
                          group jugador by jugador.strNombre into GrupoJugador
                          select new
                          {
+                             intIdJugador = GrupoJugador.Select(id => id.intIdJugador).Last(),
+                             intPuntajeTotal = GrupoJugador.Sum(puntaje => puntaje.intPuntaje),
                              strNombre = GrupoJugador.Key,
-                             intPuntajeTotal = GrupoJugador.Sum(puntaje => puntaje.intPuntaje)
+                             blnActivo = GrupoJugador.Select(activo => activo.blnActivo).Last(),
+                             dtmActualiza = GrupoJugador.Select(actualiza => actualiza.dtmActualiza).Last(),
                          };
 
             foreach (var jugador in FiltroPuntaje)
-                lstJugadorFiltroPuntaje.Add(new mdlJugador { strNombre = jugador.strNombre, intPuntaje = jugador.intPuntajeTotal});
+                lstJugadorFiltroPuntaje.Add(new mdlJugador { 
+                    intIdJugador = jugador.intIdJugador,
+                    intPuntaje = jugador.intPuntajeTotal,
+                    strNombre = jugador.strNombre,
+                    blnActivo = jugador.blnActivo,
+                    dtmActualiza = jugador.dtmActualiza
+                });
 
             // Filtro para ordenar en descendiente
             var FiltroDescendiente = from jugador in lstJugadorFiltroPuntaje

@@ -35,5 +35,14 @@ namespace pryConcurso.WebApi.Controllers
             clsJugador objClsJugador = new clsJugador();
             return objClsJugador.fncConsultarJugador(objMdlJugador);
         }
+
+        [HttpGet]
+        [Route("fncConsultarJugadorSumDescendiente")] 
+        public List<mdlJugador> fncConsultarJugadorSumDescendiente()
+        {
+            mdlJugador objMdlJugador = new mdlJugador();
+            clsJugador objClsJugador = new clsJugador();
+            return objClsJugador.fncConsultarJugadorSumDescendiente(objMdlJugador);
+        }
     }
 }

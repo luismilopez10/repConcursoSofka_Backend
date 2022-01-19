@@ -8,6 +8,5 @@ AS
 			blnActivo,
 			dtmActualiza
 		FROM dbo.tblJugador
-		WHERE tblJugador.blnActivo = 1
-		ORDER BY intPuntaje DESC
+		WHERE blnActivo = 1
 	END
